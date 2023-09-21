@@ -33,129 +33,123 @@ Before starting you should have following installed in your devices:
 
 - #### GET /todos/ :
 
-  > ***
-  >
-  > Get all todos.
-  > \
-  >  `Response` will be like
-  >
-  > ```json
-  > {
-  >   "todos": [
-  >     {
-  >       "id": 1,
-  >       "text": "Todo 1",
-  >       "isCompleted": false
-  >     },
-  >     {
-  >       "id": 2,
-  >       "text": "Todo 2",
-  >       "isCompleted": false
-  >     },
-  >     {
-  >       "id": 3,
-  >       "text": "Todo 3",
-  >       "isCompleted": true
-  >     }
-  >   ]
-  > }
-  > ```
-  >
-  > or
-  >
-  > ```json
-  > {
-  >   "todos": []
-  > }
-  > ```
-  >
-  > ***
+  Get all todos.
+  \
+   `Response` will be like
+
+  ```json
+  {
+    "todos": [
+      {
+        "id": 1,
+        "text": "Todo 1",
+        "isCompleted": false
+      },
+      {
+        "id": 2,
+        "text": "Todo 2",
+        "isCompleted": false
+      },
+      {
+        "id": 3,
+        "text": "Todo 3",
+        "isCompleted": true
+      }
+    ]
+  }
+  ```
+
+  or
+
+  ```json
+  {
+    "todos": []
+  }
+  ```
+
+  ***
 
 - #### GET /todos/:id :
 
-  > ***
-  >
-  > Get an existing todo with id= ==:id==.
-  > \
-  >  `Response` will be like when calling GET /todos/1
-  >
-  > ```json
-  > {
-  >   "id": 1,
-  >   "text": "Todo 1",
-  >   "isCompleted": false
-  > }
-  > ```
-  >
-  > or
-  > when calling `GET /todos/5653235`
-  >
-  > ```json
-  > {
-  >   "status": "not found"
-  > }
-  > ```
+  Get an existing todo with id= ==:id==.
+  \
+   `Response` will be like when calling GET /todos/1
+
+  ```json
+  {
+    "id": 1,
+    "text": "Todo 1",
+    "isCompleted": false
+  }
+  ```
+
+  or
+  when calling `GET /todos/5653235`
+
+  ```json
+  {
+    "status": "not found"
+  }
+  ```
+
+  ***
 
 - #### POST /todos/ :
-  > \
-  >  Create a todo.
-  > \
-  >  Send `Request` with body like
-  >
-  > ```json
-  > {
-  >   "text": "hello world",
-  >   "isCompleted": true
-  > }
-  > ```
-  >
-  > if your data matches the validation in Response you get
-  >
-  > ```json
-  > {
-  >   "id": 2,
-  >   "text": "hello world",
-  >   "isCompleted": true
-  > }
-  > ```
-  >
-  > else if you entered wrong data formate
-  > in `Response you get`
-  >
-  > ```json
-  > {
-  >   "error": "Not acceptable response."
-  > }
-  > ```
-  >
-  > ***
 
-#### PUT /todos/:id :
+  Create a todo.
+  \
+   Send `Request` with body like
 
-> ---
->
-> Update an existing todo with id= ==:id==.
-> \
->  Send `Request` with body like
->
-> ```json
-> {
->   "text": "hello world",
->   "isCompleted": true
-> }
-> ```
+  ```json
+  {
+    "text": "hello world",
+    "isCompleted": true
+  }
+  ```
 
----
+  if your data matches the validation in Response you get
 
-#### DELETE /todos/:id :
+  ```json
+  {
+    "id": 2,
+    "text": "hello world",
+    "isCompleted": true
+  }
+  ```
 
-> Delete an existing todo with id= ==:id==.
->
-> ---
+  else if you entered wrong data formate
+  in `Response you get`
+
+  ```json
+  {
+    "error": "Not acceptable response."
+  }
+  ```
+
+  ***
+
+- #### PUT /todos/:id :
+
+  Update an existing todo with id= ==:id==.
+  \
+   Send `Request` with body like
+
+  ```json
+  {
+    "text": "hello world",
+    "isCompleted": true
+  }
+  ```
+
+  ***
+
+- #### DELETE /todos/:id :
+
+  Delete an existing todo with id= ==:id==.
+
+  ***
 
 ## Getting Started
-
----
 
 1. Clone this repostitory :
    ```cli
