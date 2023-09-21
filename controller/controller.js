@@ -12,7 +12,7 @@ const addTodo = async (req, res) => {
     }
     let todo = await Todo.create(data);
 
-    res.status(201).json({ "status": "todo created" })
+    res.status(201).json(todo)
 }
 
 const getAllTodo = async (req, res) => {
