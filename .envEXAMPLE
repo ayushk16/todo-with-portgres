@@ -1,0 +1,6 @@
+PORT = <port to start server on>
+HOST = <database host>
+DBUSER= <database username>
+DBPASSWORD = <database password>
+DB = <database name>
+DBPORT = <default port of database>
