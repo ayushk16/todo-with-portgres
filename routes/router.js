@@ -1,6 +1,9 @@
 const { Router } = require("express");
 const controller = require("../controller/controller.js");
 const validate = require('../validations/yupValidation.js');
+const validateUrl = require('../validations/urlvalidation.js');
+
+console.log(validateUrl);
 
 const router = Router();
 
@@ -8,11 +11,11 @@ router.post('/', validate, controller.addTodo);
 
 router.get('/', controller.getAllTodo);
 
-router.get('/:id', controller.getTodo);
+router.get('/:id', validateUrl, controller.getTodo);
 
-router.put('/:id', validate, controller.updateTodo);
+router.put('/:id', validateUrl, validate, controller.updateTodo);
 
-router.delete('/:id', controller.deleteTodo);
+router.delete('/:id', validateUrl, controller.deleteTodo);
 
 
 module.exports = router;

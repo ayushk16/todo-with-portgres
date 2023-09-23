@@ -23,29 +23,52 @@ const getAllTodo = async (req, res) => {
 
 }
 
-const getTodo = async (req, res) => {
+const getTodo = async (req, res, next) => {
     const id = req.params.id;
+
     let todo = await Todo.findOne({ where: { id: id } });
     if (!todo) {
-        res.status(404).json({ error: "not found" })
+        const error = new Error('todo not found');
+        error.status = "not found";
+        error.statusCode = 404;
+        next(error)
     } else {
         res.status(200).json(todo);
     }
 
 }
 
-const updateTodo = async (req, res) => {
+const updateTodo = async (req, res, next) => {
     const id = req.params.id;
-    let todo = await Todo.update(req.body, { where: { id: id } });
-    res.status(202).json({ "status": "Accepted" });
+    const isTodo = Todo.findOne({ where: { id: id } });
+
+    if (!isTodo) {
+        const error = new Error('todo not found');
+        error.status = "id not found";
+        error.statusCode = 404;
+        next(error)
+    }
+    else {
+        let todo = await Todo.update(req.body, { where: { id: id } });
+        res.status(202).json({ "status": "Accepted" });
+    }
 }
 
 
-const deleteTodo = async (req, res) => {
+const deleteTodo = async (req, res, next) => {
     const id = req.params.id;
+    const isTodo = Todo.findOne({ where: { id: id } });
 
-    await Todo.destroy({ where: { id: id } });
-    res.status(204).json({ deleted: id });
+    if (!isTodo) {
+        const error = new Error('todo not found');
+        error.status = "id not found";
+        error.statusCode = 404;
+        next(error)
+    }
+    else {
+        await Todo.destroy({ where: { id: id } });
+        res.status(204).json({ deleted: id });
+    }
 }
 
 module.exports = {

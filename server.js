@@ -6,6 +6,7 @@ require('dotenv').config();
 // routes
 const apiRoutes = require("./routes/router.js");
 
+const errorHandlerFunction = require("./middleware/errorHandler.js")
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -24,6 +25,14 @@ app.get('/', (req, res) => {
 // api routes
 app.use('/todos', apiRoutes);
 
+app.all('*', (req, res, next) => {
+    const error = new Error(`can't find ${req.originalUrl} on the server.`);
+    error.status = 'wrong url';
+    error.statusCode = 404;
+    next(error);
+})
+
+app.use(errorHandlerFunction);
 
 // listening
 app.listen(PORT, () => {
