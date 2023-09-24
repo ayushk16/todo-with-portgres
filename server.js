@@ -5,10 +5,9 @@ require('dotenv').config();
 
 // routes
 const apiRoutes = require("./routes/router.js");
+const errorHandlerFunction = require("./middleware/errorHandler.js");
 
-const errorHandlerFunction = require("./middleware/errorHandler.js")
 const app = express();
-
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -25,6 +24,7 @@ app.get('/', (req, res) => {
 // api routes
 app.use('/todos', apiRoutes);
 
+// main url handler
 app.all('*', (req, res, next) => {
     const error = new Error(`can't find ${req.originalUrl} on the server.`);
     error.status = 'wrong url';
@@ -32,6 +32,7 @@ app.all('*', (req, res, next) => {
     next(error);
 })
 
+// error handler
 app.use(errorHandlerFunction);
 
 // listening

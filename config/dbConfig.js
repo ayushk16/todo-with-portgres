@@ -11,7 +11,7 @@ const dbConfigurations = {
 
     pool: {
         max: 5,
-        nim: 0,
+        min: 0,
         acquire: 30000,
         idle: 1000,
     }

@@ -12,7 +12,7 @@ const addTodo = async (req, res) => {
     }
     let todo = await Todo.create(data);
 
-    res.status(201).json(todo)
+    res.status(201).json({ "status": "created", "todo": todo })
 }
 
 const getAllTodo = async (req, res) => {
@@ -40,7 +40,7 @@ const getTodo = async (req, res, next) => {
 
 const updateTodo = async (req, res, next) => {
     const id = req.params.id;
-    const isTodo = Todo.findOne({ where: { id: id } });
+    let isTodo = await Todo.findOne({ where: { id: id } });
 
     if (!isTodo) {
         const error = new Error('todo not found');
@@ -50,14 +50,18 @@ const updateTodo = async (req, res, next) => {
     }
     else {
         let todo = await Todo.update(req.body, { where: { id: id } });
-        res.status(202).json({ "status": "Accepted" });
+        let updatedTodo = await Todo.findOne({ where: { id: id } });
+        res.status(202).json({
+            "status": "Updated",
+            "todo": updatedTodo
+        });
     }
 }
 
 
 const deleteTodo = async (req, res, next) => {
     const id = req.params.id;
-    const isTodo = Todo.findOne({ where: { id: id } });
+    let isTodo = await Todo.findOne({ where: { id: id } });
 
     if (!isTodo) {
         const error = new Error('todo not found');
@@ -67,7 +71,7 @@ const deleteTodo = async (req, res, next) => {
     }
     else {
         await Todo.destroy({ where: { id: id } });
-        res.status(204).json({ deleted: id });
+        res.status(200).json({ "deleted": id });
     }
 }
 

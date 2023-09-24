@@ -3,7 +3,6 @@ const controller = require("../controller/controller.js");
 const validate = require('../validations/yupValidation.js');
 const validateUrl = require('../validations/urlvalidation.js');
 
-console.log(validateUrl);
 
 const router = Router();
 
