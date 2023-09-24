@@ -3,7 +3,7 @@
 > ---
 
 This is an Express.js API, that works with postgres as database, YUP for validation and Sequelize as the ORM(Object-Relation Mapper).
-This ==README== will guide you through succesfull setting up and running the project on your devices.
+This `README` will guide you through succesfull setting up and running the project on your devices.
 
 #### Prerequisites :
 
@@ -35,7 +35,7 @@ Before starting you should have following installed in your devices:
 
   Get all todos.
   \
-   `Response` will be like
+   Response will be like
 
   ```json
   {
@@ -61,6 +61,8 @@ Before starting you should have following installed in your devices:
 
   or
 
+  if database is empty
+
   ```json
   {
     "todos": []
@@ -71,9 +73,9 @@ Before starting you should have following installed in your devices:
 
 - #### GET /todos/:id :
 
-  Get an existing todo with id= ==:id==.
+  Get an existing todo with id= `:id`.
   \
-   `Response` will be like when calling GET /todos/1
+   Response will be like
 
   ```json
   {
@@ -84,11 +86,12 @@ Before starting you should have following installed in your devices:
   ```
 
   or
-  when calling `GET /todos/5653235`
+  when calling wrong id like `GET /todos/5653235`
 
   ```json
   {
-    "status": "not found"
+    "status": 404,
+    "message": "not found"
   }
   ```
 
@@ -98,7 +101,7 @@ Before starting you should have following installed in your devices:
 
   Create a todo.
   \
-   Send `Request` with body like
+   Send Request with body like
 
   ```json
   {
@@ -111,14 +114,17 @@ Before starting you should have following installed in your devices:
 
   ```json
   {
-    "id": 2,
-    "text": "hello world",
-    "isCompleted": true
+    "status": "created",
+    "todo": {
+      "id": 7,
+      "text": "add new todo",
+      "isCompleted": false
+    }
   }
   ```
 
-  else if you entered wrong data formate
-  in `Response you get`
+  else if you entered `wrong data formate`
+  in Response you get
 
   ```json
   {
@@ -130,9 +136,9 @@ Before starting you should have following installed in your devices:
 
 - #### PUT /todos/:id :
 
-  Update an existing todo with id= ==:id==.
+  Update an existing todo with id= `:id`.
   \
-   Send `Request` with body like
+   Send Request with body like
 
   ```json
   {
@@ -141,11 +147,59 @@ Before starting you should have following installed in your devices:
   }
   ```
 
+  if todo with id exist and all your body data is in valid formate you get
+
+  ```json
+  {
+    "status": "Updated",
+    "todo": {
+      "id": 5,
+      "text": "updated todo",
+      "isCompleted": false
+    }
+  }
+  ```
+
+  if todo with given id not exist
+
+  ```json
+  {
+    "status": 404,
+    "message": "id not found"
+  }
+  ```
+
+  else if you entered `wrong data formate`
+  in Response you get
+
+  ```json
+  {
+    "error": "Not acceptable response."
+  }
+  ```
+
   ***
 
 - #### DELETE /todos/:id :
 
-  Delete an existing todo with id= ==:id==.
+  Delete an existing todo with id= `:id`.
+
+  on successful deletion you get
+
+  ```json
+  {
+    "deleted": "5"
+  }
+  ```
+
+  if todo with given id not exist
+
+  ```json
+  {
+    "status": 404,
+    "message": "id not found"
+  }
+  ```
 
   ***
 
@@ -160,7 +214,7 @@ Before starting you should have following installed in your devices:
    ```
    npm install
    ```
-3. Create a PostgreSQL database and update the configuration in .env file with your database credentials.
+3. Create a PostgreSQL database and update the configuration in `.env` file with your database credentials use `.env.example` as refrence.
 4. Start Express Server :
    ```cli
    npm start
@@ -170,7 +224,7 @@ Before starting you should have following installed in your devices:
 
 ## Environment Variables
 
-You can configure the API using environment variables. Create a `.env` file in the root directory of the project and add copy the existing `.envEXAMPLE` to `.env` and fill the mentioned fields.
+You can configure the API using environment variables. Create a `.env` file in the root directory of the project and add copy the existing `.env.example` to `.env` and fill the mentioned fields.
 
 ## Contribution
 
