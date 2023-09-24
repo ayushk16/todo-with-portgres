@@ -117,8 +117,8 @@ Before starting you should have following installed in your devices:
     "status": "created",
     "todo": {
       "id": 7,
-      "text": "add new todo",
-      "isCompleted": false
+      "text": "hello world",
+      "isCompleted": true
     }
   }
   ```
@@ -142,8 +142,8 @@ Before starting you should have following installed in your devices:
 
   ```json
   {
-    "text": "hello world",
-    "isCompleted": true
+    "text": "updated todo",
+    "isCompleted": false
   }
   ```
 
